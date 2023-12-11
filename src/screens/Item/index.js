@@ -1,28 +1,27 @@
-import React from 'react';
-import { MaterialIcons } from '@expo/vector-icons';
+import React from "react";
+import { MaterialIcons } from "@expo/vector-icons";
 
-import { Image, ScrollView, Text, View, StyleSheet } from 'react-native';
+import {
+  Image,
+  Button,
+  TouchableOpacity,
+  ScrollView,
+  Text,
+  View,
+  StyleSheet,
+} from "react-native";
 
 export default function Item({ route, navigation }) {
   const { item } = route.params;
 
   return (
     <ScrollView showsVerticalScrollIndicator={true} style={styles.container}>
-      <View style={styles.detalhe}></View>
-      <Image style={styles.itemImage} source={{ uri: item.offer_url }}  />
-      <Text style={styles.itemTitulo}>{item.title}</Text>
-      <Text style={styles.itemIngredientes}>{item.ingredients}</Text>
-      <View style={styles.info}>
-        <Text style={styles.itemPreco}>{item.newPrice}</Text>
-        <Text style={styles.itemPrecoAntigo}>{item.price}</Text>
-      </View>
-
-      <View style={styles.entrega}>
-        <View style={styles.wrapper}>
-          <MaterialIcons name={item.icon} size={22} color="#F01" />
-          <Text style={styles.entregaTitulo}>{item.delivery}</Text>
-        </View>
-        <Text style={styles.entregaAtraso}>{item.delay}</Text>
+      <View style={styles.Item}>
+        <Image source={{ uri: item.capa.url }} style={styles.imagem} />
+        <Text style={styles.nome}>{item.descricao}</Text>
+        <Text style={styles.valor}>R${item.preco}</Text>
+        <Text>Restam apenas {item.quantidade} camisas!</Text>
+        <TouchableOpacity style={styles.botao}>COMPRAR</TouchableOpacity>
       </View>
     </ScrollView>
   );
@@ -30,57 +29,61 @@ export default function Item({ route, navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
+    marginVertical: 30,
+    marginHorizontal: 0,
+    alignContent: "center",
   },
-  detalhe: {
+  Item: {
+    alignContent: "center",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  header: {
+    marginLeft: 20,
+  },
+  titulo: {
+    fontSize: 23,
+    fontWeight: "bold",
+  },
+  lista: {
     marginTop: 10,
-    marginBottom: 0,
-    marginHorizontal: 20,
+    paddingLeft: 20,
   },
-  itemImage: {
-    height: 180,
-    borderRadius: 5,
+  item: {
+    marginRight: 15,
+    alignItems: "center",
   },
-  itemTitulo: {
-    fontSize: 32,
-    color: '#333',
-    fontWeight: 'bold',
+  imagem: {
+    width: 250*2,
+    height: 290*2,
+    borderRadius: 10,
+    alignContent: "center",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  categoriaTitulo: {
+    fontSize: 16,
     marginTop: 10,
+    color: "#999",
   },
-  itemIngredientes: {
-    fontSize: 18,
-    color: '#999',
-    marginTop: 10,
+  nome: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 10,
   },
-  itemPreco: {
-    color: 'green',
-    fontSize: 22,
+  valor: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 20,
   },
-  itemPrecoAntigo: {
-    marginLeft: 5,
-    color: '#999',
-    fontSize: 22,
-    textDecorationLine: 'line-through',
-  },
-  entrega: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginTop: 20,
+  botao: {
+    backgroundColor: "black",
+    color: "white",
     borderWidth: 1,
-    borderColor: '#eee',
-    borderRadius: 2,
-    padding: 15,
-  },
-  wrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  entregaTitulo: {
-    fontSize: 15,
-    color: 'red',
-  },
-  entregaAtraso: {
-    marginLeft: 10,
+    borderRadius: 36,
+    width: 100,
+    alignContent: "center",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

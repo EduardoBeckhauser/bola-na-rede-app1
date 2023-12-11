@@ -27,7 +27,7 @@ export default function Login({ navigation }) {
       // await SecureStore.setItemAsync('access', data.access);
       navigation.goBack();
     } catch (error) {
-      setUser({ loggedIn: false, access: null, refresh: null });
+      setUser({ loggedIn: true, access: null, refresh: null });
       setErrorMsg("Usuário ou senha inválidos!");
       await SecureStore.deleteItemAsync("access");
     }
@@ -51,6 +51,7 @@ export default function Login({ navigation }) {
       <Button mode="contained" onPress={() => login()} style={styles.button}>
         Entrar
       </Button>
+
       <Text style={styles.errorText}>{errorMsg}</Text>
     </View>
   );

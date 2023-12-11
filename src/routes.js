@@ -62,7 +62,7 @@ function PerfilRoutes() {
 export default function Routes() {
   const currentUserState = useRecoilValue(userState);
 
-  if (currentUserState) {
+  if (currentUserState.loggedIn) {
     return (
       <NavigationContainer>
         <BottomTab.Navigator

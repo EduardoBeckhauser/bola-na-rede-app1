@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   Image,
   ScrollView,
@@ -6,11 +6,11 @@ import {
   TouchableOpacity,
   View,
   StyleSheet,
-} from 'react-native';
+} from "react-native";
 
-import camisaService from '../../services/camisas';
+import camisaService from "../../services/camisas";
 
-export default function Categorias() {
+export default function Categorias({ navigation }) {
   const [camisas, setCamisas] = useState([]);
 
   const getCamisas = async () => {
@@ -30,7 +30,6 @@ export default function Categorias() {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.titulo}>Camisas</Text>
-        
       </View>
       <ScrollView
         showsHorizontalScrollIndicator={false}
@@ -38,12 +37,13 @@ export default function Categorias() {
         style={styles.lista}
       >
         {camisas.map((camisa) => (
-          <TouchableOpacity key={camisa.id} style={styles.item}>
-            <Image
-              source={{ uri: camisa.capa.url }} 
-              style={styles.imagem}
-            />
-            <Text style={styles.nome}>{camisa.capa.description}</Text>
+          <TouchableOpacity
+            key={camisa.id}
+            style={styles.item}
+            onPress={() => navigation.navigate("Item", { item: camisa })}
+          >
+            <Image source={{ uri: camisa.capa.url }} style={styles.imagem} />
+            <Text style={styles.nome}>{camisa.descricao}</Text>
             <Text style={styles.valor}>R${camisa.preco}</Text>
             <Text>Restam apenas {camisa.quantidade} camisas!</Text>
           </TouchableOpacity>
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   },
   titulo: {
     fontSize: 23,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   lista: {
     marginTop: 10,
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   },
   item: {
     marginRight: 15,
-    alignItems: 'center',
+    alignItems: "center",
   },
   imagem: {
     width: 250,
@@ -81,17 +81,16 @@ const styles = StyleSheet.create({
   categoriaTitulo: {
     fontSize: 16,
     marginTop: 10,
-    color: '#999',
+    color: "#999",
   },
   nome: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 10,
   },
   valor: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 20,
   },
-
 });
